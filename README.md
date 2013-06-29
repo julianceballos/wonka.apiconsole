@@ -5,7 +5,15 @@ This is an easy API Console built with wonka.js.
 
 Just install wonkajs, here you can find more info: http://wonkajs.com
 
-Later download this project, edit the file: stylesheets/apiconsole/apiconsole.less to set the color for your project.
+Later download this project, edit the file:
+
+```
+stylesheets/apiconsole/apiconsole.less
+```
+
+to set the color for your project.
+
+Now set the attribute **api** to the api base url and the **endpoints** attribute the endpoints that you want to call via this api console.
 
 Finally just make:
 

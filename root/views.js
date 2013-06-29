@@ -31,7 +31,6 @@
         tabSize: 2,
         mode: "javascript",
         json: true,
-        value: "\{\n\}",
         autoCloseBrackets: true,
         placeholder: 'Params here as JSON...'
       });
@@ -50,7 +49,7 @@
       var form = formToJSON(me.$('form'));
       form.params = me.editor.getValue().replace(/\n/gi, '').replace(/ /gi, '');
       try {
-        form.params = eval('(' + form.params + ')');
+        form.params = form.params == '' ? {} : eval('(' + form.params + ')');
       } catch(e) {
         alert(__('There is an syntax error, please check you json object.'));
         return false;

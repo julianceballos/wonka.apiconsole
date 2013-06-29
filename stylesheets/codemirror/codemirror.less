@@ -3,7 +3,7 @@
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
-  height: 150px;
+  height: @editorHeight;
 }
 .CodeMirror-scroll {
   /* Set scrolling behaviour here */
@@ -41,12 +41,12 @@
 /* CURSOR */
 
 .CodeMirror div.CodeMirror-cursor {
-  border-left: 1px solid black;
+  border-left: 0px solid black;
   z-index: 3;
 }
 /* Shown when moving in bi-directional text */
 .CodeMirror div.CodeMirror-secondarycursor {
-  border-left: 1px solid silver;
+  border-left: 0px solid silver;
 }
 .CodeMirror.cm-keymap-fat-cursor div.CodeMirror-cursor {
   width: auto;
@@ -105,12 +105,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   line-height: 1;
   position: relative;
   overflow: hidden;
-  background: lighten(@purple, 55%);
-  color: black;
+  background: @editorBackground;
+  color: @editorTextColor;
 }
 
 .CodeMirror-activeline {
-  background: lighten(@purple, 75%);
+  background: @currentLineBackground;
+  color: @currentLineColor!important;
 }
 
 .CodeMirror-scroll {
@@ -226,15 +227,19 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 .CodeMirror div.CodeMirror-cursor {
   position: absolute;
   visibility: hidden;
-  border-right: none;
+  border-right: @cursorWidth @cursorColor solid;
   width: 0;
 }
 .CodeMirror-focused div.CodeMirror-cursor {
   visibility: visible;
 }
 
-.CodeMirror-selected { background: #d9d9d9; }
-.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }
+.CodeMirror-selected {
+  background: @textSelectedBackground;
+}
+.CodeMirror-focused .CodeMirror-selected { 
+  background: @textSelectedBackground;
+}
 
 .cm-searching {
   background: #ffa;

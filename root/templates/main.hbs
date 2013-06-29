@@ -1,8 +1,62 @@
 <script type="text/x-handlebars-template" id="root-main-template">
   <div class="wjs-header">
     <h1>
-      <p class="container">Tests</p>
+      <p class="container">API Console</p>
     </h1>
   </div>
-  <div id="results" class="container"></div>
+  <div class="container">
+    <br>
+    <form action="" class="form-inline">
+      <table class="table">
+        <tr>
+          <td>
+            <select name="verb" class="input-small">
+              <option value="get">GET</option>
+              <option value="post">POST</option>
+              <option value="put">PUT</option>
+              <option value="delete">DELETE</option>
+            </select>
+          </td>
+          <td>
+            <label>{{ base_url }}</label>
+            <select name="endpoint" class="input-normal">
+              {{# each endpoints }}
+              <option value="{{ this }}">{{ this }}</option>
+              {{/ each }}
+            </select>
+            <label>/</label>
+            <input name="id" type="text" class="input-normal">
+          </td>
+          <td>
+            <button class="btn" type="submit">Submit</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <textarea name="params" id="" cols="30" rows="10"></textarea>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <!--<div>
+      <button type="button" class="btn" id="add-param-button">Add param</button>
+    </div>
+    <br>
+    <div id="params"></div>-->
+    <br>
+    <div id="results"></div>
+  </div>
+</script>
+
+<script type="text/x-handlebars" id="root-param-template">
+  <table class="table">
+    <tr>
+      <td class="form-inline">
+        <label>Key:</label> <input type="text" class="key">
+      </td>
+      <td class="form-inline">
+        <label>Value:</label> <input type="text" class="value">
+      </td>
+    </tr>
+  </table>
 </script>

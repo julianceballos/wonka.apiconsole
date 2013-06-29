@@ -1,7 +1,11 @@
 {
   "settings": {
     "storage_engine": "localStorage",
-    "api": "",
+    "api": "https://api.lastroom.mx/v2/",
+    "endpoints": [
+      "countries",
+      "hotels"
+    ],
     "i18n": {
       "languages": [
         "en"
@@ -40,6 +44,13 @@
         "handlebars",
         "backbone.extensions",
         "globalize",
+        "codemirror",
+        "placeholder",
+        "runmode",
+        "matchbrackets",
+        "closebrackets",
+        "active-line",
+        "javascript",
         "helpers",
         "apitest"
       ],

@@ -13,9 +13,28 @@ stylesheets/apiconsole/apiconsole.less
 
 to set the color for your project.
 
-Now set the attribute **api** to the api base url and the **endpoints** attribute the endpoints that you want to call via this api console.
+Now set the attribute **api** with the url to your api base url.
 
-Finally just make:
+Then specify the endpoints for your projects, for example:
+
+```json
+{
+  "settings": {
+    "api": "...",
+    "endpoints": [{
+      "id": "update-user",
+      "description": "Update user info",
+      "method": "PUT",
+      "endpoint": "users/{USER}",
+      "params": {
+        "is_developer": true
+      }
+    }]
+  }
+}
+```
+
+Finally just generate the deploy for your project:
 
 ```sh
 $ wonkajs deploy

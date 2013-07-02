@@ -11,7 +11,7 @@
   views.Main = Bb.View.extend({
     template: getTemplate('main'),
     events: {
-      'click #add-param-button': 'onAddParam',
+      'click .api-method': 'onChangeMethod',
       'submit': 'onLoadEndpoint'
     },
     initialize: function() {
@@ -24,22 +24,32 @@
         'base_url': App.pkg.settings.api,
         'endpoints': App.pkg.settings.endpoints
       }));
-      me.editor = CodeMirror.fromTextArea(me.$('textarea')[0], {
-        matchBrackets: true,
-        styleActiveLine: true,
-        smartIndent: false,
-        tabSize: 2,
-        mode: "javascript",
-        json: true,
-        autoCloseBrackets: true,
-        placeholder: 'Params here as JSON...'
+      new views.Options({
+        el: me.$('#options'),
+        model: {},
+        parentView: me
       });
       return me;
     },
-    onAddParam: function(e) {
+    onChangeMethod: function(e) {
       var me = this;
-      var paramView = new views.Param();
-      me.$('#params').append(paramView.render().$el);
+      var target = me.$(e.currentTarget);
+      var endpoints = App.pkg.settings.endpoints;
+      var endpoint = {};
+      for(var i in endpoints) {
+        if (target.data('option') == endpoints[i].id) {
+          endpoint = endpoints[i];
+        }
+      }
+      endpoint.base_url = App.pkg.settings.api;
+      endpoint.params = JSON.stringify(endpoint.params, null, 2);
+      new views.Options({
+        el: me.$('#options'),
+        model: endpoint,
+        parentView: me
+      });
+      me.$('#verb').val(endpoint.method);
+      me.$('#resource').focus();
     },
     onLoadEndpoint: function(e) {
       e.stopPropagation();
@@ -55,11 +65,10 @@
         return false;
       }
       window.tests.evaluations = {};
-      var endpoint = uri(form.endpoint) + (form.id != '' ? ('/' + form.id) : '');
-      window.tests.add(form.verb + '-' + form.endpoint, function() {
+      window.tests.add(form.verb + '-' + form.url, function() {
         var data = {
           method: form.verb,
-          resource: endpoint,
+          resource: form.url,
           params: form.params
         };
         window.tests.call(data);
@@ -68,13 +77,27 @@
     }
   });
 
-views.Param = Bb.View.extend({
-  template: getTemplate('param'),
-  render: function() {
-    var me = this;
-    me.$el.html(me.template());
-    return me;
-  }
-})
+  views.Options = Bb.View.extend({
+    template: getTemplate('options'),
+    initialize: function() {
+      var me = this;
+      me.render();
+    },
+    render: function() {
+      var me = this;
+      me.$el.html(me.template(me.model));
+      me.options.parentView.editor = CodeMirror.fromTextArea(me.$('textarea')[0], {
+        matchBrackets: true,
+        styleActiveLine: true,
+        smartIndent: false,
+        tabSize: 2,
+        mode: "javascript",
+        json: true,
+        autoCloseBrackets: true,
+        placeholder: 'Params here as JSON...'
+      });
+      return me;
+    }
+  });
 
 })(root);

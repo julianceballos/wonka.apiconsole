@@ -1,62 +1,45 @@
 <script type="text/x-handlebars-template" id="root-main-template">
   <div class="wjs-header">
-    <h1>
-      <p class="container">API Console</p>
+    <h1 class="container">
+      <img src="https://s3.amazonaws.com/conekta/landing_v2/imgs/conekta-logo.png" alt=""> <small>API Console</small>
     </h1>
   </div>
   <div class="container">
     <br>
-    <form action="" class="form-inline">
-      <table class="table">
-        <tr>
-          <td>
-            <select name="verb" class="input-small">
-              <option value="get">GET</option>
-              <option value="post">POST</option>
-              <option value="put">PUT</option>
-              <option value="delete">DELETE</option>
-            </select>
-          </td>
-          <td>
-            <label>{{ base_url }}</label>
-            <select name="endpoint" class="input-normal">
-              {{# each endpoints }}
-              <option value="{{ this }}">{{ this }}</option>
-              {{/ each }}
-            </select>
-            <label>/</label>
-            <input name="id" type="text" class="input-normal">
-          </td>
-          <td>
-            <button class="btn" type="submit">Submit</button>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <textarea name="params" id="" cols="30" rows="10"></textarea>
-          </td>
-        </tr>
-      </table>
-    </form>
-    <!--<div>
-      <button type="button" class="btn" id="add-param-button">Add param</button>
+    <div class="row">
+      <div class="span3">
+        <ul class="nav nav-tabs nav-stacked">
+          <li class="disabled"><a href="">API Methods</a></li>
+          {{# each endpoints }}
+            <li><a class="api-method" href="#" data-option="{{ id }}"><i class="icon-chevron-right pull-right"></i> {{ description }}</a></li>
+          {{/ each}}
+        </ul>
+      </div>
+      <form id="options" class="form-horizontal span9"></form>
     </div>
-    <br>
-    <div id="params"></div>-->
     <br>
     <div id="results"></div>
   </div>
 </script>
 
-<script type="text/x-handlebars" id="root-param-template">
-  <table class="table">
-    <tr>
-      <td class="form-inline">
-        <label>Key:</label> <input type="text" class="key">
-      </td>
-      <td class="form-inline">
-        <label>Value:</label> <input type="text" class="value">
-      </td>
-    </tr>
-  </table>
+<script type="text/x-handlebars" id="root-options-template">
+  <fieldset class="control-group">
+    <div class="span2" style="margin-left: 0;">
+      <select id="verb" name="verb" class="span2">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+    </div>
+    <div class="span5 resource-field">
+      <input id="resource" class="span5" type="text" value="{{ this.base_url }}{{ this.endpoint }}">
+    </div>
+    <div class="span2">
+      <button class="btn btn-inverse span2" type="submit" style="margin-left: 0;">Send</button>
+    </div>
+  </fieldset>
+  <fieldset class="">
+    <textarea name="params" id="" cols="30" rows="10"></textarea>
+  </fieldset>
 </script>

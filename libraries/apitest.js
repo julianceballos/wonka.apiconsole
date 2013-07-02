@@ -1,17 +1,17 @@
 (function() {
   
-  var templateResult =    '<h2><p>{{ method }} {{ resource }}</p></h2>'
+  var templateResult =    '<h3><p>{{ method }} {{ resource }}</p></h3>'
                         + '<hr>'
-                        + '<h3>Relative duration</h3>'
+                        + '<h4>Relative duration</h4>'
                         + '<pre class="alert alert-info">{{ duration }}</pre>'
-                        + '<h3>Params</h3>'
+                        + '<h4>Params</h4>'
                         + '<pre>{{ params }}</pre>'
                         + '{{# if success }}'
-                        + '<h3>Success</h3>'
+                        + '<h4>Success</h4>'
                         + '<pre class="alert alert-success">{{ success }}</pre>'
                         + '{{/ if }}'
                         + '{{# if error }}'
-                        + '<h3>Error</h3>'
+                        + '<h4>Error</h4>'
                         + '<pre class="alert alert-error">{{ error }}</pre>'
                         + '{{/ if }}';
 

@@ -45,7 +45,7 @@
     call: function(data, callback) {
       var me = this;
       switch(data.method) {
-        case 'post':
+        case 'POST':
           var timeStart = new Date().getTime();
           $.post(data.resource, data.params, function(response) {
             var duration = new Date().getTime() - timeStart;
@@ -65,7 +65,7 @@
             }
           });
           break;
-        case 'get':
+        case 'GET':
           var query = '?';
           for (var i in data.params) {
             query += i + '=' + data.params[i] + '&';
@@ -91,7 +91,7 @@
             }
           });
           break;
-        case 'put':
+        case 'PUT':
           data['_method'] = 'put';
           var timeStart = new Date().getTime();
           $.post(data.resource, data.params, function(response) {
@@ -112,7 +112,7 @@
             }
           });
           break;
-        case 'delete':
+        case 'DELETE':
           data['_method'] = 'delete';
           var timeStart = new Date().getTime();
           $.post(data.resource, data.params, function(response) {
